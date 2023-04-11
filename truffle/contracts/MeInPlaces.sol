@@ -14,7 +14,7 @@ contract MeInPlaces is ERC721, ERC721URIStorage, Ownable {
     constructor() ERC721("MeInPlaces", "BLT") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://ethereum-blockchain-developer.com/nftdata/";
+        return "https://andreiblt1304.github.io/MeInPlaces-metadata/";
     }
 
     function safeMint(address to, string memory uri) public onlyOwner {
