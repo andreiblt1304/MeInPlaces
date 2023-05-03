@@ -1,1 +1,5 @@
 node_modules
+.secret
+.infura
+.etherscan
+build/contracts/

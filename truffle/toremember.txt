@@ -1,3 +1,4 @@
 to access the ganache network: add the ganache network from truffle-config like an object with host: IP, port, network_id: "*"
-to migrate on ganache: truffle migrate --network ganache
+to start ganache: ganache
+to migrate on ganache: truffle migrate --network ganache (in the truffle terminal)
 to integrate via cli: truffle console --network ganache
