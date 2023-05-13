@@ -2,3 +2,4 @@ to access the ganache network: add the ganache network from truffle-config like 
 to start ganache: ganache
 to migrate on ganache: truffle migrate --network ganache (in the truffle terminal)
 to integrate via cli: truffle console --network ganache
+to deploy using the truffle dashboard: truffle run verify *contract name* --network *network name*

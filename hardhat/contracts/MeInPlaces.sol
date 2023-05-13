@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity 0.8.18;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "truffle/Console.sol";
 
 contract MeInPlaces is ERC721, Ownable {
     using Counters for Counters.Counter;
@@ -15,6 +14,10 @@ contract MeInPlaces is ERC721, Ownable {
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://andreiblt1304.github.io/MeInPlaces-metadata/";
+    }
+
+    function getBaseURI() public view returns (string memory) {
+        return tokenURI(0);
     }
 
     function safeMint(address to) public onlyOwner {
@@ -39,18 +42,24 @@ contract MeInPlaces is ERC721, Ownable {
         return string(abi.encodePacked(_baseURI(), (getRandomIndex(ids)),".json"));
     }
 
-    function getRandomIndex(uint16[10] memory idArr) public view returns (uint) {
-        uint randomIndex = uint(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender))) % idArr.length;
+    function getRandomIndex(uint16[10] memory idArr) public view returns (string memory) {
+        uint randomIndex = uint(
+            keccak256(
+                abi.encodePacked(
+                    block.timestamp, 
+                    block.prevrandao, 
+                    msg.sender
+                    )
+                )
+            ) % idArr.length;
 
-        return idArr[randomIndex];
+        return Strings.toString(idArr[randomIndex]);
     }
 
     function buyToken() public payable {
         uint256 tokenId = _tokenIdCounter.current();
         require(msg.value == tokenId * 0.1 ether, "Wrong amount of funds sent");
-        console.log("got here ");
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
     }
 }
-//await instance.buyToken({value: web3.utils.toWei("0.1", "ether"), gas: 300000})
