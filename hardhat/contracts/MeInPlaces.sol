@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -61,5 +61,10 @@ contract MeInPlaces is ERC721, Ownable {
         require(msg.value == tokenId * 0.1 ether, "Wrong amount of funds sent");
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
+    }
+
+    function burn(uint256 tokenId) public {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not owner nor approved");
+        _burn(tokenId);
     }
 }

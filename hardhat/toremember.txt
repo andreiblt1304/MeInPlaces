@@ -1,0 +1,4 @@
+to compile: npx hardhat compile
+local blockchain: npx hardhat node
+to run deploy script: npx hardhat run --network *network* scripts/deploy.js
+to verify: npx hardhat verify --network *network* scripts/deploy.js
